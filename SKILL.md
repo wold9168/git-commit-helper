@@ -1,6 +1,6 @@
 ---
 name: git-commit-helper
-description: 当用户要求撰写、构思、生成 git commit 信息时触发。用户可能会说"写commit"、"构思commit"、"生成commit信息"、"根据暂存区内容写commit"、"帮我想个commit信息"等，也包括交互过程中需要从暂存区或工作区改动推断合适 commit message 的场景。
+description: 当用户要求撰写、构思、生成 git commit 信息时触发
 ---
 
 # git-commit-helper
@@ -56,13 +56,13 @@ git log --oneline -10        # 一行式概览，观察 type/subject 模式
 ```
 <中文 commit message，严格遵循项目惯例>
 
-Assisted-by: <实际模型名 (provided by <供应商>) + <Agent 名>>
+Assisted-by: <模型名> + <Agent 名>
 
 ---
 
 <英文 commit message，严格遵循项目惯例>
 
-Assisted-by: <实际模型名 (provided by <供应商>) + <Agent 名>>
+Assisted-by: <模型名> + <Agent 名>
 ```
 
 中英文 commit message 均**完全依照**项目 git log 中观察到的格式，内容上相同，**仅有语言上的差异**。如果无法从 git log 推断出明确风格，使用以下推荐格式：
@@ -72,7 +72,7 @@ Assisted-by: <实际模型名 (provided by <供应商>) + <Agent 名>>
 
 <可选 body 行>
 
-Assisted-by: <实际模型名 (provided by <供应商>) + <Agent 名>>
+Assisted-by: <模型名> + <Agent 名>
 ```
 
 **Assisted-by 字段**：**不预设默认值**。根据当前运行环境的实际情况填入——模型名、供应商、Agent 名均使用当前上下文中的真实信息。不标注使用的工具名（如 bash、question 等）。
@@ -117,13 +117,13 @@ Assisted-by: <实际模型名 (provided by <供应商>) + <Agent 名>>
 ```
 在调度器中增加任务超时重试机制
 
-Assisted-by: DeepSeek V4 Flash Free (provided by OpenCode Zen) + OpenCode
+Assisted-by: DeepSeek V4 Flash + OpenCode
 
 ---
 
 feat: add task timeout with retry mechanism in scheduler
 
-Assisted-by: DeepSeek V4 Flash Free (provided by OpenCode Zen) + OpenCode
+Assisted-by: DeepSeek V4 Flash + OpenCode
 ```
 
 **输入**：暂存区包含 `README.md` 中修正了拼写错误
@@ -133,13 +133,13 @@ Assisted-by: DeepSeek V4 Flash Free (provided by OpenCode Zen) + OpenCode
 ```
 修正 README.md 中的拼写错误
 
-Assisted-by: DeepSeek V4 Flash Free (provided by OpenCode Zen) + OpenCode
+Assisted-by: DeepSeek V4 Flash + OpenCode
 
 ---
 
 docs: fix typos in README.md
 
-Assisted-by: DeepSeek V4 Flash Free (provided by OpenCode Zen) + OpenCode
+Assisted-by: DeepSeek V4 Flash + OpenCode
 ```
 
 **输入**：暂存区包含对 `git-commit-helper` 技能的修改
@@ -157,7 +157,9 @@ Assisted-by: deepseek-v4-flash-free (provided by opencode/deepseek-v4-flash-free
 
 Refine git-commit-helper SKILL.md
 
-Assisted-by: deepseek-v4-flash-free (provided by opencode/deepseek-v4-flash-free) + OpenCode
+Assisted-by: deepseek-v4-flash-free (provided by opencode/deepseek-v4-flash-free) + OpenCode bash git write read
 ```
 
 像是`项目惯例为自然语言祈使句，无 type 前缀。以下是 commit 信息：`这样不属于commit message的句子，不要出现。
+
+同时注意 Assisted-by 行的格式。

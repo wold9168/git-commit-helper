@@ -56,13 +56,13 @@ git log --oneline -10        # 一行式概览，观察 type/subject 模式
 ```
 <中文 commit message，严格遵循项目惯例>
 
-Assisted-by: <模型名> + <Agent 名>
+Assisted-by: <模型名> + <Agent 名/Harness 名>
 
 ---
 
 <英文 commit message，严格遵循项目惯例>
 
-Assisted-by: <模型名> + <Agent 名>
+Assisted-by: <模型名> + <Agent 名/Harness 名>
 ```
 
 中英文 commit message 均**完全依照**项目 git log 中观察到的格式，内容上相同，**仅有语言上的差异**。如果无法从 git log 推断出明确风格，使用以下推荐格式：
@@ -72,17 +72,19 @@ Assisted-by: <模型名> + <Agent 名>
 
 <可选 body 行>
 
-Assisted-by: <模型名> + <Agent 名>
+Assisted-by: <模型名> + <Agent 名/Harness 名>
 ```
 
-**Assisted-by 字段**：**不预设默认值**。根据当前运行环境的实际情况填入——模型名、供应商、Agent 名均使用当前上下文中的真实信息。不标注使用的工具名（如 bash、question 等）。
+**Assisted-by 字段**：**不预设默认值**。根据当前运行环境的实际情况填入——模型名、Agent 名/Harness名均使用当前上下文中的真实信息。不标注使用的工具名（如 bash、question 等）。不标注模型供应商。
+
+Agent 名/Harness 名不标注当前 Agent 在当前 Agent 网络中被分配的名称，而是标注调用当前模型进行对话、开发的 Agent 工具/Harness 工具名称。（此处的 Agent 工具和 Harness 工具不指代你当前能够使用的 tool）
 
 # 5. 重要约束
 
-- 仅输出文本 commit message。**不执行** `git add`、`git commit`、`git commit --amend` 等任何 git 写入操作。
-- 不询问用户"是否需要我代劳执行 git 操作"，直接输出 commit 信息即可。
-- 不使用 emoji。
-- 不添加与 commit 无关的说明或总结。
+- 仅输出文本 commit message。**不执行** `git add`、`git commit`、`git commit --amend` 等任何 git 写入操作
+- 不询问用户"是否需要我代劳执行 git 操作"，直接输出 commit 信息即可
+- 不使用 emoji
+- 不添加与 commit 无关的说明或总结
 
 ## Type 速查表
 
@@ -162,4 +164,22 @@ Assisted-by: deepseek-v4-flash-free (provided by opencode/deepseek-v4-flash-free
 
 像是`项目惯例为自然语言祈使句，无 type 前缀。以下是 commit 信息：`这样不属于commit message的句子，不要出现。
 
-同时注意 Assisted-by 行的格式。
+同时注意 Assisted-by 行的格式。该行中出现了 Agent 名的同时出现了 Agent 的工具名。并且出现了供应商名称。
+
+**另一个错误输出**：
+
+```
+
+优化 git-commit-helper SKILL.md
+
+Assisted-by: deepseek-v4-flash-free (provided by opencode/deepseek-v4-flash-free) + OpenCode
+
+---
+
+Refine git-commit-helper SKILL.md
+
+Assisted-by: deepseek-v4-flash-free + lead/DeepSeek Harness
+```
+
+该错误例子中，问题在于 Assisted-by 中出现了 `lead` 这一外部编排工具在当前 Agent 网络中为当前 Agent 分配的名称。
+```
